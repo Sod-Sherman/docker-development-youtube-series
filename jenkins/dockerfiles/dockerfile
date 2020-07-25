@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk
-
+RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf
 RUN apt-get update -y && apt-get install -y curl sudo
 
 #Install docker
