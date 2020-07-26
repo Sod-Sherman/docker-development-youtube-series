@@ -3,10 +3,18 @@ node('jenkins-slave') {
      stage('test pipeline') {
         sh(script: """
             echo "hello"
-           git clone https://github.com/Sod-Sherman/docker-development-youtube-series
-           cd ./docker-development-youtube-series/golang
+
+            if [ -d "./docker-development-youtube-series"  ]
+            then
+                echo "Removing existing folder"
+                rm -rf ./docker-development-youtube-series
+            else
+                git clone https://github.com/Sod-Sherman/docker-development-youtube-series
+            fi
            
-           docker build . -t test
+            cd ./docker-development-youtube-series/golang
+           
+            docker build . -t test
         """)
     }
 }
